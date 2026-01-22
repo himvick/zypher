@@ -58,8 +58,12 @@ const AuthenticationBox = () => {
   return (
     <div className="flex flex-col gap-5 border-black p-10 pt-2 border-2 rounded-2xl">
       <div className="flex flex-row justify-around gap-1">
-        <button onClick={() => setSignup(false)}>Login</button>
-        <button onClick={() => setSignup(true)}>Signup</button>
+        <button className="cursor-pointer" onClick={() => setSignup(false)}>
+          Login
+        </button>
+        <button className="cursor-pointer" onClick={() => setSignup(true)}>
+          Signup
+        </button>
       </div>
       {signup ? (
         <Signup createNewWallet={createNewWallet} />
