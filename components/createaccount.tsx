@@ -4,15 +4,19 @@ import React from "react";
 import { useState } from "react";
 
 interface Props {
-  createNewWallet: () => HDNodeWallet;
+  createNewWallet: (password: string) => HDNodeWallet;
+  password: string;
 }
 
-const CreateAccount = ({ createNewWallet }: Props) => {
+const CreateAccount = ({ createNewWallet, password }: Props) => {
   const [isOpened, setIsOpened] = useState<Boolean>(false);
   const [mnemonic, setMnemonic] = useState<string[]>([]);
 
   const createWallet = () => {
-    const wallet = createNewWallet();
+    if (password.length < 8) {
+      return alert("Password must be at least 8 characters long");
+    }
+    const wallet = createNewWallet(password);
     const phrase = wallet?.mnemonic?.phrase.split(" ");
     setMnemonic(phrase || []);
     setIsOpened(true);
@@ -47,8 +51,17 @@ const CreateAccount = ({ createNewWallet }: Props) => {
             <div className="text-red-600">
               <h4>
                 Please save this phrase securely. It is essential for account
-                recovery.
+                recovery. Without your seed phrase, you may lose access to your
+                account.
               </h4>{" "}
+            </div>
+            <div>
+              <button
+                className="px-4 py-2 bg-blue-950 text-white rounded-2xl w-60 cursor-pointer"
+                onClick={() => setIsOpened(false)}
+              >
+                Continue
+              </button>
             </div>
           </div>
         </div>

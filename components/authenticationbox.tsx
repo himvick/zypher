@@ -6,14 +6,23 @@ import { createEtherWallet } from "../public/utils.tsx";
 import { HDNodeWallet } from "ethers";
 
 interface SignupProps {
-  createNewWallet: () => HDNodeWallet;
+  createNewWallet: (password: string) => HDNodeWallet;
 }
 
 const Signup: React.FC<SignupProps> = ({ createNewWallet }) => {
+  const [password, setPassword] = useState<string>("");
   return (
     <div>
       <div className="flex flex-col gap-2 p-0.5">
-        <CreateAccount createNewWallet={createNewWallet} />
+        <input
+          className="rounded-2xl border border-black p-2"
+          placeholder="Create New Password"
+          value={password}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+            setPassword(e.target.value)
+          }
+        />
+        <CreateAccount createNewWallet={createNewWallet} password={password} />
         <RestoreAccount />
       </div>
     </div>
@@ -50,8 +59,13 @@ const Login: React.FC<LoginProps> = ({ loginWallet }) => {
 const AuthenticationBox = () => {
   const [signup, setSignup] = useState<boolean>(false);
 
-  const createNewWallet = (): HDNodeWallet => {
-    return createEtherWallet();
+  const createNewWallet = (password: string): HDNodeWallet => {
+    const wallet = createEtherWallet();
+    wallet.encrypt(password).then((json) => {
+      localStorage.setItem("encryptedWallet", json);
+      localStorage.setItem("password", password);
+    });
+    return wallet;
   };
 
   const loginWallet = (password: string) => {};
