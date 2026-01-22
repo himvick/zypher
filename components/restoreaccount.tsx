@@ -1,9 +1,24 @@
 "use client";
+import { HDNodeWallet } from "ethers";
 import React, { useState } from "react";
 
-const RestoreAccount = () => {
+interface Props {
+  restoreWallet: (seedPhrase: string, password: string) => HDNodeWallet;
+}
+
+const RestoreAccount = ({ restoreWallet }: Props) => {
   const [isOpened, setIsOpened] = useState<Boolean>(false);
   const [phrase, setPhrase] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+  const restore = () => {
+    if (phrase.length === 0) {
+      return alert("Please enter a valid seed phrase");
+    }
+    if (password.length < 8) {
+      return alert("Password must be at least 8 characters long");
+    }
+    restoreWallet(phrase, password);
+  };
   return (
     <div>
       <button
@@ -34,7 +49,18 @@ const RestoreAccount = () => {
               placeholder="Enter your seed phrase in ascending order"
               className="rounded-2xl border border-black p-2 w-5/6"
             />
-            <button className="bg-blue-950 rounded-2xl px-4 py-2 text-white cursor-pointer">
+            <input
+              value={password}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                setPassword(e.target.value)
+              }
+              placeholder="Create New Password"
+              className="border border-black p-2 rounded-2xl w-5/6"
+            />
+            <button
+              className="bg-blue-950 rounded-2xl px-4 py-2 text-white cursor-pointer"
+              onClick={restore}
+            >
               Restore Account
             </button>
           </div>

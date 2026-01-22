@@ -3,13 +3,14 @@ import React, { useState } from "react";
 import RestoreAccount from "./restoreaccount.tsx";
 import CreateAccount from "./createaccount.tsx";
 import { createEtherWallet } from "../public/utils.tsx";
-import { HDNodeWallet } from "ethers";
+import { HDNodeWallet, Wallet } from "ethers";
 
 interface SignupProps {
   createNewWallet: (password: string) => HDNodeWallet;
+  restoreWallet: (seedPhrase: string, password: string) => HDNodeWallet;
 }
 
-const Signup: React.FC<SignupProps> = ({ createNewWallet }) => {
+const Signup: React.FC<SignupProps> = ({ createNewWallet, restoreWallet }) => {
   const [password, setPassword] = useState<string>("");
   return (
     <div>
@@ -23,7 +24,7 @@ const Signup: React.FC<SignupProps> = ({ createNewWallet }) => {
           }
         />
         <CreateAccount createNewWallet={createNewWallet} password={password} />
-        <RestoreAccount />
+        <RestoreAccount restoreWallet={restoreWallet} />
       </div>
     </div>
   );
@@ -68,6 +69,18 @@ const AuthenticationBox = () => {
     return wallet;
   };
 
+  const restoreWallet = (
+    seedPhrase: string,
+    password: string,
+  ): HDNodeWallet => {
+    const wallet = Wallet.fromPhrase(seedPhrase);
+    wallet.encrypt(password).then((json) => {
+      localStorage.setItem("encryptedWallet", json);
+      localStorage.setItem("password", password);
+    });
+    return wallet;
+  };
+
   const loginWallet = (password: string) => {};
   return (
     <div className="flex flex-col gap-5 border-black p-10 pt-2 border-2 rounded-2xl">
@@ -80,7 +93,10 @@ const AuthenticationBox = () => {
         </button>
       </div>
       {signup ? (
-        <Signup createNewWallet={createNewWallet} />
+        <Signup
+          createNewWallet={createNewWallet}
+          restoreWallet={restoreWallet}
+        />
       ) : (
         <Login loginWallet={loginWallet} />
       )}
