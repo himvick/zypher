@@ -10,7 +10,12 @@ const Signup: React.FC<SignupProps> = ({ createNewWallet }) => {
   return (
     <div>
       <div className="flex flex-col gap-2 p-0.5">
-        <button onClick={createNewWallet}>Create New Wallet</button>
+        <button
+          className="px-4 py-2 bg-blue-950 text-white rounded-2xl w-60 cursor-pointer"
+          onClick={createNewWallet}
+        >
+          Create New Wallet
+        </button>
         <RestoreAccount />
       </div>
     </div>
@@ -28,12 +33,18 @@ const Login: React.FC<LoginProps> = ({ loginWallet }) => {
       <input
         type="password"
         value={loginPassword}
+        className="border border-gray rounded-2xl p-2 w-60"
         onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
           setLoginPassword(e.target.value)
         }
         placeholder="Password"
       />
-      <button onClick={() => loginWallet(loginPassword)}>Login</button>
+      <button
+        className="bg-blue-950 rounded-2xl px-4 py-2 text-white cursor-pointer"
+        onClick={() => loginWallet(loginPassword)}
+      >
+        Login
+      </button>
     </div>
   );
 };
@@ -45,10 +56,10 @@ const AuthenticationBox = () => {
 
   const loginWallet = (password: string) => {};
   return (
-    <div className="border-black border-2 rounded-2xl">
-      <div className="flex flex-row gap-1">
-        <button>Login</button>
-        <button>Signup</button>
+    <div className="flex flex-col gap-5 border-black p-10 pt-2 border-2 rounded-2xl">
+      <div className="flex flex-row justify-around gap-1">
+        <button onClick={() => setSignup(false)}>Login</button>
+        <button onClick={() => setSignup(true)}>Signup</button>
       </div>
       {signup ? (
         <Signup createNewWallet={createNewWallet} />

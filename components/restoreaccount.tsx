@@ -6,7 +6,9 @@ const RestoreAccount = () => {
   const [phrase, setPhrase] = useState<string>("");
   return (
     <div>
-      <button>Restore With Seed Phrase</button>
+      <button className="w-60 px-4 py-2 bg-amber-600 text-white rounded-2xl cursor-pointer">
+        Restore With Seed Phrase
+      </button>
       {isOpened && (
         <div className="flex w-full h-full items-center justify-center">
           <div className="flex rounded p-1 bg-white border-2 border-black">
