@@ -1,6 +1,7 @@
 "use client";
 import { HDNodeWallet } from "ethers";
 import React, { useState } from "react";
+import { useRouter } from "next/navigation";
 
 interface Props {
   restoreWallet: (seedPhrase: string, password: string) => HDNodeWallet;
@@ -10,6 +11,9 @@ const RestoreAccount = ({ restoreWallet }: Props) => {
   const [isOpened, setIsOpened] = useState<Boolean>(false);
   const [phrase, setPhrase] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+  const [ethWallet, setEthWallet] = useState<HDNodeWallet | null>(null);
+
+  const router = useRouter();
   const restore = () => {
     if (phrase.length === 0) {
       return alert("Please enter a valid seed phrase");
@@ -17,7 +21,13 @@ const RestoreAccount = ({ restoreWallet }: Props) => {
     if (password.length < 8) {
       return alert("Password must be at least 8 characters long");
     }
-    restoreWallet(phrase, password);
+    const wallet = restoreWallet(phrase, password);
+    setEthWallet(wallet);
+  };
+
+  const goHome = () => {
+    setIsOpened(false);
+    router.push("/home");
   };
   return (
     <div>

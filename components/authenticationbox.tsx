@@ -4,6 +4,7 @@ import RestoreAccount from "./restoreaccount.tsx";
 import CreateAccount from "./createaccount.tsx";
 import { createEtherWallet } from "../public/utils.tsx";
 import { HDNodeWallet, Wallet } from "ethers";
+import { useRouter } from "next/navigation";
 
 interface SignupProps {
   createNewWallet: (password: string) => HDNodeWallet;
@@ -59,6 +60,7 @@ const Login: React.FC<LoginProps> = ({ loginWallet }) => {
 
 const AuthenticationBox = () => {
   const [signup, setSignup] = useState<boolean>(false);
+  const router = useRouter();
 
   const createNewWallet = (password: string): HDNodeWallet => {
     const wallet = createEtherWallet();
@@ -81,7 +83,19 @@ const AuthenticationBox = () => {
     return wallet;
   };
 
-  const loginWallet = (password: string) => {};
+  const loginWallet = (password: string) => {
+    const storedPassword = localStorage.getItem("password") || "";
+    const encryptedWallet = localStorage.getItem("encryptedWallet") || "";
+    if (password === storedPassword) {
+      alert("Login successful");
+      Wallet.fromEncryptedJson(encryptedWallet, password).then((wallet) => {
+        router.push("/home");
+      });
+    } else {
+      alert("Incorrect password");
+      return;
+    }
+  };
   return (
     <div className="flex flex-col gap-5 border-black p-10 pt-2 border-2 rounded-2xl">
       <div className="flex flex-row justify-around gap-1">

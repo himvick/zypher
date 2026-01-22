@@ -2,6 +2,7 @@
 import { HDNodeWallet } from "ethers";
 import React from "react";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 interface Props {
   createNewWallet: (password: string) => HDNodeWallet;
@@ -11,6 +12,9 @@ interface Props {
 const CreateAccount = ({ createNewWallet, password }: Props) => {
   const [isOpened, setIsOpened] = useState<Boolean>(false);
   const [mnemonic, setMnemonic] = useState<string[]>([]);
+  const [ethWallet, setEthWallet] = useState<HDNodeWallet | null>(null);
+
+  const router = useRouter();
 
   const createWallet = () => {
     if (password.length < 8) {
@@ -18,8 +22,14 @@ const CreateAccount = ({ createNewWallet, password }: Props) => {
     }
     const wallet = createNewWallet(password);
     const phrase = wallet?.mnemonic?.phrase.split(" ");
+    setEthWallet(wallet);
     setMnemonic(phrase || []);
     setIsOpened(true);
+  };
+
+  const goHome = () => {
+    setIsOpened(false);
+    router.push("/home");
   };
   return (
     <div>
@@ -58,7 +68,7 @@ const CreateAccount = ({ createNewWallet, password }: Props) => {
             <div>
               <button
                 className="px-4 py-2 bg-blue-950 text-white rounded-2xl w-60 cursor-pointer"
-                onClick={() => setIsOpened(false)}
+                onClick={goHome}
               >
                 Continue
               </button>
