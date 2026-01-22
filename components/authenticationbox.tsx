@@ -2,9 +2,11 @@
 import React, { useState } from "react";
 import RestoreAccount from "./restoreaccount.tsx";
 import CreateAccount from "./createaccount.tsx";
+import { createEtherWallet } from "../public/utils.tsx";
+import { HDNodeWallet } from "ethers";
 
 interface SignupProps {
-  createNewWallet: () => void;
+  createNewWallet: () => HDNodeWallet;
 }
 
 const Signup: React.FC<SignupProps> = ({ createNewWallet }) => {
@@ -48,7 +50,9 @@ const Login: React.FC<LoginProps> = ({ loginWallet }) => {
 const AuthenticationBox = () => {
   const [signup, setSignup] = useState<boolean>(false);
 
-  const createNewWallet = () => {};
+  const createNewWallet = (): HDNodeWallet => {
+    return createEtherWallet();
+  };
 
   const loginWallet = (password: string) => {};
   return (

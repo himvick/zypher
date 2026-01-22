@@ -1,21 +1,27 @@
 "use client";
+import { HDNodeWallet } from "ethers";
 import React from "react";
 import { useState } from "react";
 
 interface Props {
-  createNewWallet: () => void;
+  createNewWallet: () => HDNodeWallet;
 }
 
 const CreateAccount = ({ createNewWallet }: Props) => {
   const [isOpened, setIsOpened] = useState<Boolean>(false);
+  const [mnemonic, setMnemonic] = useState<string[]>([]);
+
+  const createWallet = () => {
+    const wallet = createNewWallet();
+    const phrase = wallet?.mnemonic?.phrase.split(" ");
+    setMnemonic(phrase || []);
+    setIsOpened(true);
+  };
   return (
     <div>
       <button
         className="px-4 py-2 bg-blue-950 text-white rounded-2xl w-60 cursor-pointer"
-        onClick={() => {
-          createNewWallet();
-          setIsOpened(true);
-        }}
+        onClick={createWallet}
       >
         Create New Wallet
       </button>
@@ -29,6 +35,20 @@ const CreateAccount = ({ createNewWallet }: Props) => {
               >
                 X
               </button>
+            </div>
+            <h3>Your Seed Phrase</h3>
+            <div className="flex flex-wrap justify-center gap-2 rounded-2xl border border-black p-4">
+              {mnemonic.map((word, index) => (
+                <span key={index} className="bg-gray-200 px-2 py-1 rounded">
+                  {index + 1}. {word}
+                </span>
+              ))}
+            </div>
+            <div className="text-red-600">
+              <h4>
+                Please save this phrase securely. It is essential for account
+                recovery.
+              </h4>{" "}
             </div>
           </div>
         </div>
