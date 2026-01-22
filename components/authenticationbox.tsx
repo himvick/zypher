@@ -1,6 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import RestoreAccount from "./restoreaccount.tsx";
+import CreateAccount from "./createaccount.tsx";
 
 interface SignupProps {
   createNewWallet: () => void;
@@ -10,12 +11,7 @@ const Signup: React.FC<SignupProps> = ({ createNewWallet }) => {
   return (
     <div>
       <div className="flex flex-col gap-2 p-0.5">
-        <button
-          className="px-4 py-2 bg-blue-950 text-white rounded-2xl w-60 cursor-pointer"
-          onClick={createNewWallet}
-        >
-          Create New Wallet
-        </button>
+        <CreateAccount createNewWallet={createNewWallet} />
         <RestoreAccount />
       </div>
     </div>
