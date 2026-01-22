@@ -11,7 +11,6 @@ const RestoreAccount = ({ restoreWallet }: Props) => {
   const [isOpened, setIsOpened] = useState<Boolean>(false);
   const [phrase, setPhrase] = useState<string>("");
   const [password, setPassword] = useState<string>("");
-  const [ethWallet, setEthWallet] = useState<HDNodeWallet | null>(null);
 
   const router = useRouter();
   const restore = () => {
@@ -22,7 +21,6 @@ const RestoreAccount = ({ restoreWallet }: Props) => {
       return alert("Password must be at least 8 characters long");
     }
     const wallet = restoreWallet(phrase, password);
-    setEthWallet(wallet);
   };
 
   const goHome = () => {

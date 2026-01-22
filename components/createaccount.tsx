@@ -12,7 +12,6 @@ interface Props {
 const CreateAccount = ({ createNewWallet, password }: Props) => {
   const [isOpened, setIsOpened] = useState<Boolean>(false);
   const [mnemonic, setMnemonic] = useState<string[]>([]);
-  const [ethWallet, setEthWallet] = useState<HDNodeWallet | null>(null);
 
   const router = useRouter();
 
@@ -22,7 +21,6 @@ const CreateAccount = ({ createNewWallet, password }: Props) => {
     }
     const wallet = createNewWallet(password);
     const phrase = wallet?.mnemonic?.phrase.split(" ");
-    setEthWallet(wallet);
     setMnemonic(phrase || []);
     setIsOpened(true);
   };

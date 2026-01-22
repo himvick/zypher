@@ -85,12 +85,8 @@ const AuthenticationBox = () => {
 
   const loginWallet = (password: string) => {
     const storedPassword = localStorage.getItem("password") || "";
-    const encryptedWallet = localStorage.getItem("encryptedWallet") || "";
     if (password === storedPassword) {
-      alert("Login successful");
-      Wallet.fromEncryptedJson(encryptedWallet, password).then((wallet) => {
-        router.push("/home");
-      });
+      router.push("/home");
     } else {
       alert("Incorrect password");
       return;
