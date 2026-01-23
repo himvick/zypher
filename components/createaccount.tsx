@@ -32,7 +32,7 @@ const CreateAccount = ({ createNewWallet, password }: Props) => {
   return (
     <div>
       <button
-        className="px-4 py-2 bg-blue-950 text-white rounded-2xl w-60 cursor-pointer"
+        className="px-4 py-2 bg-blue-950 text-white rounded-2xl w-full cursor-pointer"
         onClick={createWallet}
       >
         Create New Wallet

@@ -15,9 +15,9 @@ const Signup: React.FC<SignupProps> = ({ createNewWallet, restoreWallet }) => {
   const [password, setPassword] = useState<string>("");
   return (
     <div>
-      <div className="flex flex-col gap-2 p-0.5">
+      <div className="flex flex-col w-72 gap-2 p-0.5">
         <input
-          className="rounded-2xl border border-black p-2"
+          className="rounded-2xl border border-black w-full p-2"
           placeholder="Create New Password"
           value={password}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
@@ -38,11 +38,11 @@ interface LoginProps {
 const Login: React.FC<LoginProps> = ({ loginWallet }) => {
   const [loginPassword, setLoginPassword] = useState<string>("");
   return (
-    <div className="flex flex-col gap-2 p-0.5">
+    <div className="flex flex-col gap-2 w-72 p-0.5">
       <input
         type="password"
         value={loginPassword}
-        className="border border-gray rounded-2xl p-2 w-60"
+        className="border border-gray rounded-2xl p-2 w-full"
         onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
           setLoginPassword(e.target.value)
         }

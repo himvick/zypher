@@ -21,6 +21,8 @@ const RestoreAccount = ({ restoreWallet }: Props) => {
       return alert("Password must be at least 8 characters long");
     }
     const wallet = restoreWallet(phrase, password);
+    console.log(wallet);
+    goHome();
   };
 
   const goHome = () => {
@@ -31,7 +33,7 @@ const RestoreAccount = ({ restoreWallet }: Props) => {
     <div>
       <button
         onClick={() => setIsOpened(true)}
-        className="w-60 px-4 py-2 bg-amber-600 text-white rounded-2xl cursor-pointer"
+        className="w-full px-4 py-2 bg-amber-600 text-white rounded-2xl cursor-pointer"
       >
         Restore With Seed Phrase
       </button>
