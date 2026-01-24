@@ -4,7 +4,7 @@ import TradeButton from "./tradebutton";
 
 const HeaderDesktop = () => {
   return (
-    <div className="flex flex-col w-full p-4 bg-gray-100 h-lvh absolute">
+    <div className="flex flex-col w-44 left-0 p-4 bg-gray-100 h-lvh fixed">
       <div className="text-2xl font-bold mb-8">Zypher</div>
       <div className="flex flex-col space-y-2">
         <Link
