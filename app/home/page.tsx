@@ -7,9 +7,12 @@ import { HDNodeWallet, Wallet, ethers } from "ethers";
 const ALCHEMY_API_KEY =
   "https://eth-mainnet.g.alchemy.com/v2/iGa8VUjryb9tyVVsXe4Gv";
 
+const ETHERSCAN_API_KEY = `https://api.etherscan.io/v2/api?module=stats&action=ethprice&apikey=RQINA7EXJVU6YWPBWB6CIINX4MFXYXMS4Z&chainid=1`;
+
 const page = () => {
   const [wallet, setWallet] = useState<HDNodeWallet | null>(null);
   const [balance, setBalance] = useState<number | null>(null);
+  const [ethPrice, setEthPrice] = useState<number | null>(null);
 
   useEffect(() => {
     const password = localStorage.getItem("password");
@@ -22,6 +25,7 @@ const page = () => {
         },
       );
     }
+    getEtherPrice();
   }, []);
 
   const getBalance = async (address: ethers.AddressLike) => {
@@ -33,10 +37,29 @@ const page = () => {
     });
     setBalance(parseFloat(ethers.formatEther(ethBalance)));
   };
+
+  const getEtherPrice = async () => {
+    try {
+      const response = await fetch(ETHERSCAN_API_KEY);
+      const data = await response.json();
+      console.log(data.result.ethusd);
+      setEthPrice(data.result.ethusd);
+      return data.result.ethusd;
+    } catch (error) {
+      console.error(error);
+      return null;
+    }
+  };
   return (
     <div className="flex flex-col w-full">
       <DashboardHeader />
-      {wallet && <Dashboard balance={balance} address={wallet.address} />}
+      {wallet && (
+        <Dashboard
+          balance={balance}
+          address={wallet.address}
+          ethPrice={ethPrice}
+        />
+      )}
     </div>
   );
 };
