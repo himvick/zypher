@@ -7,9 +7,9 @@ interface Props {
 const CopyButton = ({ text }: Props) => {
   return (
     <div className="flex items-center flex-row gap-2 rounded-2xl border border-black px-4 py-1 w-fit">
-      <p>{text.slice(0, 10) + "..." + text.slice(-5)}</p>
+      <p className="text-sm">{text.slice(0, 7) + "..." + text.slice(-3)}</p>
       <button
-        className="cursor-pointer"
+        className="cursor-pointer hover:opacity-70 active:scale-95"
         onClick={() => navigator.clipboard.writeText(text)}
       >
         <svg
