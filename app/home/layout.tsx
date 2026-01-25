@@ -12,7 +12,7 @@ const layout = ({ children }: Readonly<{ children: React.ReactNode }>) => {
         <div className="hidden sm:block w-44 border-r border-gray-300">
           <HeaderDesktop />
         </div>
-        <div>{children}</div>
+        <div className="flex-1">{children}</div>
       </div>
     </div>
   );
