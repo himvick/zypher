@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import DashboardHeader from "@/components/dashboardheader.tsx";
 import Dashboard from "@/components/dashboard.tsx";
 import TradeButtons from "@/components/tradebuttons.tsx";
+import TokenList from "@/components/tokenlist.tsx";
 import { HDNodeWallet, Wallet, ethers } from "ethers";
 
 const ALCHEMY_API_KEY =
@@ -62,6 +63,7 @@ const page = () => {
         />
       )}
       <TradeButtons />
+      <TokenList />
     </div>
   );
 };
