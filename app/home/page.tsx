@@ -63,7 +63,7 @@ const page = () => {
         />
       )}
       <TradeButtons />
-      <TokenList />
+      {wallet && <TokenList address={wallet.address} />}
     </div>
   );
 };
