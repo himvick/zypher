@@ -1,3 +1,4 @@
+"use client";
 import React, { useEffect, useState } from "react";
 
 const ALCHEMY_API_URL =
@@ -8,8 +9,10 @@ interface Props {
 }
 
 const TokenList = ({ address }: Props) => {
+  const [tokens, setTokens] = useState([]);
   useEffect(() => {
     const fetchTokens = async () => {
+      console.log("fetching tokens");
       let allTokens = [];
       try {
         const res = await fetch(ALCHEMY_API_URL, {
@@ -24,7 +27,7 @@ const TokenList = ({ address }: Props) => {
         });
         const data = await res.json();
         let tokenAddresses = data.result.tokenBalances
-          .filter((token: any) => token.tokenBalance == 0)
+          .filter((token: any) => token.tokenBalance != 0)
           .map((token: any) => token.contractAddress);
         for (let i = 0; i < tokenAddresses.length; i++) {
           const result = await fetch(ALCHEMY_API_URL, {
