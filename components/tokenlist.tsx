@@ -9,7 +9,7 @@ interface Props {
 }
 
 const TokenList = ({ address }: Props) => {
-  const [tokens, setTokens] = useState([]);
+  const [tokens, setTokens] = useState<any[]>([]);
   useEffect(() => {
     const fetchTokens = async () => {
       console.log("fetching tokens");
@@ -44,12 +44,14 @@ const TokenList = ({ address }: Props) => {
           allTokens.push({ ...dat.result, address: tokenAddresses[i] });
         }
         localStorage.setItem("allTokens", JSON.stringify(allTokens));
+        setTokens(allTokens);
       } catch (error) {
         console.error("Error getting tokens: ", error);
       }
     };
     if (JSON.parse(localStorage.getItem("allTokens") as string)?.length == 0) {
       fetchTokens();
+      console.log(JSON.parse(localStorage.getItem("allTokens") as string));
     }
   }, []);
   return <div></div>;
