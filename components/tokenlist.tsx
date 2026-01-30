@@ -1,5 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
+import TokenCard from "./tokencard";
 
 const ALCHEMY_API_URL =
   "https://eth-mainnet.g.alchemy.com/v2/iGa8VUjryb9tyVVsXe4Gv";
@@ -27,7 +28,7 @@ const TokenList = ({ address }: Props) => {
         });
         const data = await res.json();
         let tokenAddresses = data.result.tokenBalances.filter(
-          (token: any) => token.tokenBalance != 0,
+          (token: any) => token.tokenBalance == 0,
         );
         for (let i = 0; i < tokenAddresses.length; i++) {
           const result = await fetch(ALCHEMY_API_URL, {
@@ -55,12 +56,19 @@ const TokenList = ({ address }: Props) => {
         console.error("Error getting tokens: ", error);
       }
     };
+    setTokens(JSON.parse(localStorage.getItem("allTokens") as string) || []);
     if (JSON.parse(localStorage.getItem("allTokens") as string)?.length == 0) {
       fetchTokens();
     }
     console.log(JSON.parse(localStorage.getItem("allTokens") as string));
   }, []);
-  return <div></div>;
+  return (
+    <div className="flex flex-col space-y-2">
+      {tokens.map((token) => (
+        <TokenCard key={token.address} {...token} />
+      ))}
+    </div>
+  );
 };
 
 export default TokenList;
