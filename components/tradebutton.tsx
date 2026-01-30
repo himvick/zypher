@@ -35,13 +35,13 @@ const TradeButton = () => {
       {isOpen && (
         <div className="mt-2 p-2 bg-gray-200 rounded-lg">
           <Link
-            href="/trade/swap"
+            href="/trade/buy"
             className="block px-2 py-1 hover:bg-gray-300 rounded"
           >
             Buy
           </Link>
           <Link
-            href="/trade/swap"
+            href="/trade/sell"
             className="block px-2 py-1 hover:bg-gray-300 rounded"
           >
             Sell
@@ -53,13 +53,13 @@ const TradeButton = () => {
             Swap
           </Link>
           <Link
-            href="/trade/swap"
+            href="/trade/send"
             className="block px-2 py-1 hover:bg-gray-300 rounded"
           >
             Send
           </Link>
           <Link
-            href="/trade/swap"
+            href="/trade/receive"
             className="block px-2 py-1 hover:bg-gray-300 rounded"
           >
             Receive

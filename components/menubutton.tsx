@@ -22,9 +22,18 @@ const MenuButton = () => {
       </button>
       {isOpen && (
         <div className="absolute right-0 mt-2 p-2 w-48 bg-white border border-gray-200 rounded-md shadow-lg z-10 flex flex-col">
+          <Link href="/home">Home</Link>
           <Link href="/discover">Discover</Link>
           <Link href="/activity">Activity</Link>
-          <Link href="/move">Move Crypto</Link>
+          <hr className="my-2 border-t border-gray-300" />
+          <Link href="/trade/buy">Buy</Link>
+          <Link href="/trade/sell">Sell</Link>
+          <Link href="/trade/swap">Swap</Link>
+          <Link href="/trade/send">Send</Link>
+          <Link href="/trade/receive">Receive</Link>
+          <hr className="my-2 border-t border-gray-300" />
+          <Link href="/settings">Settings</Link>
+          <Link href="/help">Help</Link>
         </div>
       )}
     </div>
