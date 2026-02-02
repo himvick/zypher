@@ -18,30 +18,25 @@ const page = () => {
   });
 
   return (
-    <div>
-      <div>
-        <h2>Buy</h2>
-        <hr />
-        <div>
+    <div className="flex flex-col justify-center items-center p-12">
+      <div className="flex flex-col gap-5 rounded-2xl sm:border items-center p-4 min-w-100">
+        <h2 className="text-4xl">Buy</h2>
+        <hr className="w-full" />
+        <div className="rounded-2xl border px-4 py-2">
           <p>
             {wallet?.address.slice(0, 7) + "..." + wallet?.address.slice(-4)}
           </p>
         </div>
-        <div>
-          <h1>GHS</h1>
-          <input
-            type="text"
-            value={amount}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-              setAmount(e.target.value)
-            }
-          />
+        <div className="text-4xl flex flex-col items-center justify-center">
+          <h1 className="">GHS</h1>
         </div>
         <div>
-          <p>Ethereum</p>
+          <p className="text-2xl">Ethereum</p>
         </div>
-        <hr />
-        <button>Continue</button>
+        <hr className="w-full" />
+        <button className="rounded-2xl px-4 py-2 bg-blue-950 text-white text-2xl cursor-pointer active:bg-blue-900">
+          Continue
+        </button>
       </div>
     </div>
   );
