@@ -53,17 +53,19 @@ const page = () => {
     }
   };
   return (
-    <div className="flex flex-col w-full p-2">
+    <div className="flex flex-col w-full">
       <DashboardHeader />
-      {wallet && (
-        <Dashboard
-          balance={balance}
-          address={wallet.address}
-          ethPrice={ethPrice}
-        />
-      )}
-      <TradeButtons />
-      {wallet && <TokenList address={wallet.address} />}
+      <div className="flex flex-col p-2">
+        {wallet && (
+          <Dashboard
+            balance={balance}
+            address={wallet.address}
+            ethPrice={ethPrice}
+          />
+        )}
+        <TradeButtons />
+        {wallet && <TokenList address={wallet.address} />}
+      </div>
     </div>
   );
 };
