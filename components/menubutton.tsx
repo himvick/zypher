@@ -26,11 +26,11 @@ const MenuButton = () => {
           <Link href="/discover">Discover</Link>
           <Link href="/activity">Activity</Link>
           <hr className="my-2 border-t border-gray-300" />
-          <Link href="/trade/buy">Buy</Link>
-          <Link href="/trade/sell">Sell</Link>
-          <Link href="/trade/swap">Swap</Link>
-          <Link href="/trade/send">Send</Link>
-          <Link href="/trade/receive">Receive</Link>
+          <Link href="/home/buy">Buy</Link>
+          <Link href="/home/sell">Sell</Link>
+          <Link href="/home/swap">Swap</Link>
+          <Link href="/home/send">Send</Link>
+          <Link href="/home/receive">Receive</Link>
           <hr className="my-2 border-t border-gray-300" />
           <Link href="/settings">Settings</Link>
           <Link href="/help">Help</Link>
