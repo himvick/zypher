@@ -15,7 +15,7 @@ const page = () => {
         },
       );
     }
-  });
+  }, []);
 
   return (
     <div className="flex flex-col justify-center items-center p-12">
@@ -27,8 +27,16 @@ const page = () => {
             {wallet?.address.slice(0, 7) + "..." + wallet?.address.slice(-4)}
           </p>
         </div>
-        <div className="text-4xl flex flex-col items-center justify-center">
+        <div className="text-4xl flex flex-row flex-wrap items-center justify-center">
           <h1 className="">GHS</h1>
+          <input
+            type="text"
+            value={amount}
+            style={{ width: `${amount.length || 1}ch` }}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+              setAmount(e.target.value)
+            }
+          />
         </div>
         <div>
           <p className="text-2xl">Ethereum</p>
