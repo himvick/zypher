@@ -1,3 +1,4 @@
+"use client";
 import { HDNodeWallet, Wallet } from "ethers";
 import React, { useEffect, useState } from "react";
 
@@ -16,8 +17,6 @@ const page = () => {
     }
   });
 
-  const setInput = () => {};
-
   return (
     <div>
       <div>
@@ -30,8 +29,19 @@ const page = () => {
         </div>
         <div>
           <h1>GHS</h1>
-          <input type="text" />
+          <input
+            type="text"
+            value={amount}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+              setAmount(e.target.value)
+            }
+          />
         </div>
+        <div>
+          <p>Ethereum</p>
+        </div>
+        <hr />
+        <button>Continue</button>
       </div>
     </div>
   );
