@@ -19,40 +19,46 @@ const page = () => {
   }, []);
 
   return (
-    <div>
-      <h2>Send</h2>
-      <div>
-        <div>
+    <div className="h-lvh flex flex-col justify-center items-center gap-5">
+      <h2 className="text-4xl">Send</h2>
+      <div className="flex flex-col gap-4 w-full md:w-100 items-center border rounded-2xl p-4">
+        <div className="flex flex-row items-center justify-between w-full">
           <p>From</p>
-          <div>
-            <p>
-              {wallet?.address.slice(0, 7) + "..." + wallet?.address.slice(-4)}
-            </p>
+          <div className="rounded-2xl border p-2">
+            <input
+              type="text"
+              className="focus:border-none focus:outline-none"
+              value={
+                wallet?.address.slice(0, 7) + "..." + wallet?.address.slice(-4)
+              }
+              readOnly
+            />
           </div>
         </div>
-        <div>
+        <div className="flex flex-row items-center justify-between w-full">
           <p>To</p>
           <input
             type="text"
             value={toAddress}
+            className="border rounded-2xl p-2"
             onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
               setToAddress(e.target.value)
             }
           />
         </div>
-        <div>
+        <div className="flex flex-row items-center justify-between w-full">
           <p>Amount</p>
           <input
             type="number"
             value={amount}
+            className="border rounded-2xl p-2"
             onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
               setAmount(e.target.value)
             }
           />
         </div>
-        <div>Ethereum</div>
         <div>
-          <button className="rounded-2xl bg-blue-950 text-white px-4 py-2">
+          <button className="rounded-2xl w-44 bg-blue-950 text-white px-4 py-2 cursor-pointer">
             Send
           </button>
         </div>
