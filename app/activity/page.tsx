@@ -4,7 +4,7 @@ import { Alchemy, Network, AssetTransfersCategory } from "alchemy-sdk";
 import DashboardHeader from "@/components/dashboardheader.tsx";
 import { HDNodeWallet, Wallet } from "ethers";
 
-const apiKey = "https://eth-mainnet.g.alchemy.com/v2/iGa8VUjryb9tyVVsXe4Gv";
+const apiKey = "iGa8VUjryb9tyVVsXe4Gv";
 
 const page = () => {
   useEffect(() => {
@@ -29,7 +29,7 @@ const page = () => {
       const txs = await alchemy.core.getAssetTransfers({
         fromBlock: "0x0",
         toBlock: "latest",
-        fromAddress: address,
+        fromAddress: "0x2F6973E4d2FCA6455a34B3BfE2197f34EF5ae052",
         category: [
           AssetTransfersCategory.EXTERNAL,
           AssetTransfersCategory.INTERNAL,
