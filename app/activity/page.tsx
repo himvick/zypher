@@ -1,12 +1,20 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import { Alchemy, Network, AssetTransfersCategory } from "alchemy-sdk";
+import {
+  Alchemy,
+  Network,
+  AssetTransfersCategory,
+  AssetTransfersWithMetadataResult,
+} from "alchemy-sdk";
 import DashboardHeader from "@/components/dashboardheader.tsx";
 import { HDNodeWallet, Wallet } from "ethers";
 
 const apiKey = "iGa8VUjryb9tyVVsXe4Gv";
 
 const page = () => {
+  const [transactions, setTransactions] = useState<
+    AssetTransfersWithMetadataResult[]
+  >([]);
   useEffect(() => {
     const getTransactions = async () => {
       const password = localStorage.getItem("password");
@@ -29,7 +37,7 @@ const page = () => {
       const txs = await alchemy.core.getAssetTransfers({
         fromBlock: "0x0",
         toBlock: "latest",
-        fromAddress: "0x2F6973E4d2FCA6455a34B3BfE2197f34EF5ae052",
+        fromAddress: "0x34383AeA39f8AC5E5Aa009100D5d62Cfb7389AfE",
         category: [
           AssetTransfersCategory.EXTERNAL,
           AssetTransfersCategory.INTERNAL,
@@ -40,7 +48,8 @@ const page = () => {
         withMetadata: true,
         excludeZeroValue: true,
       });
-      console.log(txs);
+      setTransactions(txs.transfers);
+      console.log(txs.transfers);
     };
   }, []);
   return (
