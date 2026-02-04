@@ -13,7 +13,6 @@ const TokenList = ({ address }: Props) => {
   const [tokens, setTokens] = useState<any[]>([]);
   useEffect(() => {
     const fetchTokens = async () => {
-      console.log("fetching tokens");
       let allTokens = [];
       try {
         const res = await fetch(ALCHEMY_API_URL, {
@@ -48,7 +47,6 @@ const TokenList = ({ address }: Props) => {
             balance: tokenAddresses[i].tokenBalance,
           });
         }
-        console.log("finished fetching tokens");
 
         localStorage.setItem("allTokens", JSON.stringify(allTokens));
         setTokens(allTokens);
@@ -57,7 +55,10 @@ const TokenList = ({ address }: Props) => {
       }
     };
     setTokens(JSON.parse(localStorage.getItem("allTokens") as string) || []);
-    if (JSON.parse(localStorage.getItem("allTokens") as string)?.length == 0) {
+    if (
+      !JSON.parse(localStorage.getItem("allTokens") as string) ||
+      JSON.parse(localStorage.getItem("allTokens") as string)?.length == 0
+    ) {
       fetchTokens();
     }
     console.log(JSON.parse(localStorage.getItem("allTokens") as string));
