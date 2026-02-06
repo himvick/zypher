@@ -19,7 +19,7 @@ const page = () => {
 
   return (
     <div className="flex flex-col justify-center items-center p-12 min-w-full">
-      <div className="flex flex-col gap-5 rounded-2xl sm:border items-center p-4 w-100 max-md:min-w-full">
+      <div className="flex flex-col gap-5 rounded-2xl sm:border items-center p-4 w-full md:w-100">
         <h2 className="text-4xl">Buy</h2>
         <hr className="w-full" />
         <div className="rounded-2xl border px-4 py-2">
