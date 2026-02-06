@@ -10,9 +10,17 @@ interface Props {
   asset: string | null;
   value: number | null;
   hash: string | null;
+  timestamp: string;
 }
 
-const TransactionCard = ({ to, from, asset, value, hash }: Props) => {
+const TransactionCard = ({
+  to,
+  from,
+  asset,
+  value,
+  hash,
+  timestamp,
+}: Props) => {
   const [wallet, setWallet] = useState<HDNodeWallet>();
   useEffect(() => {
     const getTransactions = async () => {
@@ -27,6 +35,11 @@ const TransactionCard = ({ to, from, asset, value, hash }: Props) => {
     };
     getTransactions();
   }, []);
+
+  const getDate = (time: string): string => {
+    const date = new Date(time);
+    return date.toDateString();
+  };
   return (
     <div className="w-full">
       {wallet && from == wallet.address ? (
@@ -49,20 +62,21 @@ const TransactionCard = ({ to, from, asset, value, hash }: Props) => {
           </div>
         </div>
       ) : (
-        <div className="flex flex-row justify-around items-center">
+        <div className="flex flex-row justify-around items-center border-b border-gray-600 p-2">
           <div className="text-white bg-black rounded-full p-1">
             <PiArrowDownLeftBold className="w-6 h-6" />
           </div>
           <div>
-            <p>Transfer</p>
+            <p className="font-bold text-gray-400">Transfer</p>
+            <p>{getDate(timestamp)}</p>
           </div>
           <div>
-            <p>{asset}</p>
-            <p>{value}</p>
+            <p className="text-2xl font-bold">{asset}</p>
+            <p className="text-gray-500 font-bold">{value}</p>
           </div>
-          <div>
+          <div className="flex flex-row items-center">
             <span>
-              <PiSimCardFill />
+              <PiSimCardFill className="w-6 h-6 text-amber-600" />
             </span>
             <p>{to?.slice(0, 7) + "..." + to?.slice(-4)}</p>
           </div>

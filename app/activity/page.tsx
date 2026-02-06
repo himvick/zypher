@@ -56,20 +56,8 @@ const page = () => {
   return (
     <div className="flex flex-col w-full">
       <DashboardHeader />
-      <div>
+      <div className="p-4 border-b-2 border-gray-600">
         <p>Transaction History</p>
-      </div>
-      <div>
-        {transactions.length > 0 && (
-          <TransactionCard
-            to={transactions[0].to}
-            from={transactions[0].from}
-            asset={transactions[0].asset}
-            value={transactions[0].value}
-            hash={transactions[0].hash}
-            key={transactions[0].hash}
-          />
-        )}
       </div>
       <div>
         {transactions.map((transaction) => (
@@ -80,6 +68,7 @@ const page = () => {
               asset={transaction.asset}
               value={transaction.value}
               hash={transaction.hash}
+              timestamp={transaction.metadata.blockTimestamp}
             />
           </div>
         ))}
