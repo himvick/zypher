@@ -8,6 +8,7 @@ import {
 } from "alchemy-sdk";
 import DashboardHeader from "@/components/dashboardheader.tsx";
 import { HDNodeWallet, Wallet } from "ethers";
+import TransactionCard from "@/components/transactioncard.tsx";
 
 const apiKey = "iGa8VUjryb9tyVVsXe4Gv";
 
@@ -55,7 +56,34 @@ const page = () => {
   return (
     <div className="flex flex-col w-full">
       <DashboardHeader />
-      <div>Activity Page</div>
+      <div>
+        <p>Transaction History</p>
+      </div>
+      <div>
+        {transactions.length > 0 && (
+          <TransactionCard
+            to={transactions[0].to}
+            from={transactions[0].from}
+            asset={transactions[0].asset}
+            value={transactions[0].value}
+            hash={transactions[0].hash}
+            key={transactions[0].hash}
+          />
+        )}
+      </div>
+      <div>
+        {transactions.map((transaction) => (
+          <div key={transaction.hash}>
+            <TransactionCard
+              to={transaction.to}
+              from={transaction.from}
+              asset={transaction.asset}
+              value={transaction.value}
+              hash={transaction.hash}
+            />
+          </div>
+        ))}
+      </div>
     </div>
   );
 };
